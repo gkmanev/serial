@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 port1 = "/dev/ttyS0"  # Replace with the appropriate serial port
 baudrate = 115200  # Replace with the appropriate baud rate
 # Configure MQTT broker
-mqtt_broker = "localhost"  # Replace with the IP address or hostname of your MQTT broker
+mqtt_broker = "host.docker.internal"  # Replace with the IP address or hostname of your MQTT broker
 mqtt_port = 1883  # Replace with the MQTT broker port
 mqtt_topic = "gps"  # Replace with the desired MQTT topic
 

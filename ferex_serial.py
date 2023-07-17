@@ -6,7 +6,7 @@ port2 = "/dev/ttyUSB0"  # Replace with the appropriate serial port
 baudrate = 115200  # Replace with the appropriate baud rate
 
 # Configure MQTT broker
-mqtt_broker = "localhost"  # Replace with the MQTT broker address
+mqtt_broker = "host.docker.internal"  # Replace with the MQTT broker address
 mqtt_port = 1883  # Replace with the MQTT broker port
 mqtt_topic = "ferex"  # MQTT topic to publish the binary buffers
 
