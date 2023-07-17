@@ -1,0 +1,13 @@
+version: '3'
+services:
+  gps_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+
+  ferex_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
