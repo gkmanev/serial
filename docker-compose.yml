@@ -1,13 +1,18 @@
 version: '3'
 services:
-  gps_service:
+  gps_serial:
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
+    volumes:
+      - ./logs:/var/log/supervisor
 
-  ferex_service:
+  ferex_serial:
     build:
       context: .
       dockerfile: Dockerfile
     restart: always
+    volumes:
+      - ./logs:/var/log/supervisor
+
