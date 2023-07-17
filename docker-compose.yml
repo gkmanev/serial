@@ -1,6 +1,8 @@
 version: '3'
 services:
   gps_serial:
+    devices:
+      - /dev/ttyS0:/dev/ttyS0
     build:
       context: .
       dockerfile: Dockerfile
@@ -9,6 +11,8 @@ services:
       - ./logs:/var/log/supervisor
 
   ferex_serial:
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
     build:
       context: .
       dockerfile: Dockerfile
