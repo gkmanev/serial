@@ -16,6 +16,6 @@ RUN pip install -r requirements.txt
 # Copy supervisor configuration files
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY gps_serial.conf /etc/supervisor/conf.d/gps_serial.conf
-COPY ferex_serial.conf /etc/supervisor/conf.d/ferex_serial.conf
+#COPY ferex_serial.conf /etc/supervisor/conf.d/ferex_serial.conf
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
