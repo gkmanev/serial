@@ -1,5 +1,6 @@
 import serial
 import paho.mqtt.client as mqtt
+import time
 
 # Configure serial port 2
 port2 = "/dev/ttyUSB0"  # Replace with the appropriate serial port
@@ -20,22 +21,41 @@ buffer = b""
 start_character = b'\x03'
 buffer_length = 4
 
+def connect_to_serial():
+    while True:
+        try:
+            serial_port2.open()
+            print("Serial device connected!")
+            break
+        except serial.SerialException as e:
+            print(f"Serial device not available: {e}")
+            print("Retrying in 5 seconds...")
+            time.sleep(5)
+
+connect_to_serial()
+
 while True:
-    data = serial_port2.read(100)
-    if data:
-        buffer += data
+    try:
+        data = serial_port2.read(100)
+        if data:
+            buffer += data
 
-        # Process the buffer when the start character is found
-        while start_character in buffer:
-            start_index = buffer.index(start_character)
-            buffer = buffer[start_index:]
+            # Process the buffer when the start character is found
+            while start_character in buffer:
+                start_index = buffer.index(start_character)
+                buffer = buffer[start_index:]
 
-            # Split the buffer into fixed-length binary buffers
-            if len(buffer) >= buffer_length:
-                binary_buffer = buffer[:buffer_length]
-                print(binary_buffer)
-                mqtt_client.publish(mqtt_topic, binary_buffer)
-                buffer = buffer[buffer_length:]
-            else:
-                # Break the loop if the buffer length is not sufficient
-                break
+                # Split the buffer into fixed-length binary buffers
+                if len(buffer) >= buffer_length:
+                    binary_buffer = buffer[:buffer_length]
+                    print(binary_buffer)
+                    mqtt_client.publish(mqtt_topic, binary_buffer)
+                    buffer = buffer[buffer_length:]
+                else:
+                    # Break the loop if the buffer length is not sufficient
+                    break
+    
+    except serial.SerialException as e:
+        print(f"Serial device disconnected: {e}")
+        print("Reconnecting...")
+        connect_to_serial()
