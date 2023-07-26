@@ -1,6 +1,5 @@
 import serial
 import paho.mqtt.client as mqtt
-import time
 # Configure serial port 1
 port1 = "/dev/ttyS0"  # Replace with the appropriate serial port
 baudrate = 115200  # Replace with the appropriate baud rate
@@ -20,41 +19,23 @@ serial_port1 = serial.Serial(port1, baudrate=baudrate, timeout=0)
 buffer = ""
 start_character = "$"
 
-def connect_to_serial():
-    while True:
-        try:
-            serial_port1.open()
-            print("Serial device connected!")
-            break
-        except serial.SerialException as e:
-            print(f"Serial device not available: {e}")
-            print("Retrying in 5 seconds...")
-            time.sleep(5)
-            
-connect_to_serial()
-
 while True:
-    try:
-        data = serial_port1.read(100)
-        if data:
-            buffer += data.decode()
+    data = serial_port1.read(100)
+    if data:
+        buffer += data.decode()
 
-            # Process the buffer when the start character is found
-            while start_character in buffer:
-                start_index = buffer.index(start_character)
-                buffer = buffer[start_index:]
+        # Process the buffer when the start character is found
+        while start_character in buffer:
+            start_index = buffer.index(start_character)
+            buffer = buffer[start_index:]
 
-                # Split the buffer at newline character
-                newline_index = buffer.find("\n")
-                if newline_index != -1:
-                    ascii_string = buffer[:newline_index].strip()
-                    print(ascii_string)
-                    mqtt_client.publish(mqtt_topic, ascii_string)
-                    buffer = buffer[newline_index + 1:]
-                else:
-                    # Break the loop if newline character is not found yet
-                    break
-    except serial.SerialException as e:
-        print(f"Serial device disconnected: {e}")
-        print("Reconnecting...")
-        connect_to_serial()
+            # Split the buffer at newline character
+            newline_index = buffer.find("\n")
+            if newline_index != -1:
+                ascii_string = buffer[:newline_index].strip()
+                print(ascii_string)
+                mqtt_client.publish(mqtt_topic, ascii_string)
+                buffer = buffer[newline_index + 1:]
+            else:
+                # Break the loop if newline character is not found yet
+                break
