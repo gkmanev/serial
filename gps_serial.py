@@ -8,7 +8,7 @@ try:
     while True:
         data = serial_port1.read(100)
         if data:
-            print(data.decode())
+            print(data)
 except Exception as e:
     print(f"Error: {e}")
 finally:
