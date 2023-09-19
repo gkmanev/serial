@@ -2,7 +2,7 @@ version: '3'
 services:
   gps_serial:
     devices:
-      - /dev/ttyS0:/dev/ttyS0
+      - /dev/ttyACM0:/dev/ttyACM0
     build:
       context: .
       dockerfile: Dockerfile
