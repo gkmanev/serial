@@ -1,6 +1,7 @@
 version: '3'
 services:
   gps_serial:
+    user: "1000:1000"  # Specify the user and group IDs
     devices:
       - /dev/ttyACM0:/dev/ttyACM0
     build:
