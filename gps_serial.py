@@ -23,7 +23,7 @@ while True:
     data = serial_port1.read(100)
     if data:
         print(data)
-        buffer += data.decode()
+        buffer += data
 
         # Process the buffer when the start character is found
         while start_character in buffer:
