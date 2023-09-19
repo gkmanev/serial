@@ -25,18 +25,19 @@ while True:
         print(data)
         buffer += data.decode()
 
-        # # Process the buffer when the start character is found
-        # while start_character in buffer:
-        #     start_index = buffer.index(start_character)
-        #     buffer = buffer[start_index:]
+        # Process the buffer when the start character is found
+        while start_character in buffer:
+            start_index = buffer.index(start_character)
+            buffer = buffer[start_index:]
 
-        #     # Split the buffer at newline character
-        #     newline_index = buffer.find("\n")
-        #     if newline_index != -1:
-        #         ascii_string = buffer[:newline_index].strip()
-        #         print(ascii_string)
-        #         mqtt_client.publish(mqtt_topic, ascii_string)
-        #         buffer = buffer[newline_index + 1:]
-        #     else:
-        #         # Break the loop if newline character is not found yet
-        #         break
+            # Split the buffer at newline character
+            newline_index = buffer.find("\n")
+            if newline_index != -1:
+                ascii_string = buffer[:newline_index].strip()
+                print("HERE!!!!")
+                print(ascii_string)
+                mqtt_client.publish(mqtt_topic, ascii_string)
+                buffer = buffer[newline_index + 1:]
+            else:
+                # Break the loop if newline character is not found yet
+                break
