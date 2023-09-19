@@ -23,7 +23,7 @@ start_character = b"$"  # Initialize as bytes
 while True:
     data = serial_port1.read(100)
     if data:
-        print(data)
+        #print(data)
         buffer += data
 
         # Process the buffer when the start character is found
@@ -34,7 +34,8 @@ while True:
             # Split the buffer at newline character
             newline_index = buffer.find(b"\n")
             if newline_index != -1:
-                ascii_string = buffer[:newline_index].strip().decode("utf-8")
+                # Decode with error handling to ignore invalid characters
+                ascii_string = buffer[:newline_index].strip().decode("utf-8", errors="ignore")
                 print("HERE!!!!")
                 print(ascii_string)
                 mqtt_client.publish(mqtt_topic, ascii_string)
