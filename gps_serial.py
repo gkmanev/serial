@@ -36,8 +36,8 @@ while True:
             if newline_index != -1:
                 # Decode with error handling to ignore invalid characters
                 ascii_string = buffer[:newline_index].strip().decode("utf-8", errors="ignore")
-                print("HERE!!!!")
-                print(ascii_string)
+                # print("HERE!!!!")
+                # print(ascii_string)
                 mqtt_client.publish(mqtt_topic, ascii_string)
                 buffer = buffer[newline_index + 1:]
             else:
