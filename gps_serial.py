@@ -23,7 +23,7 @@ start_character = b"$"  # Initialize as bytes
 while True:
     data = serial_port1.read(100)
     if data:
-        #print(data)
+        print(data)
         buffer += data
 
         # Process the buffer when the start character is found
