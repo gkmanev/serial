@@ -13,6 +13,8 @@ COPY . /app
 # Install Python dependencies
 RUN pip install -r requirements.txt
 
+RUN groupadd -g 20 dialout && usermod -a -G dialout root
+
 # Copy supervisor configuration files
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY gps_serial.conf /etc/supervisor/conf.d/gps_serial.conf
