@@ -13,7 +13,11 @@ COPY . /app
 # Install Python dependencies
 RUN pip install -r requirements.txt
 
-RUN groupadd -g 20 dialout && usermod -a -G dialout root
+# Add a user to the dialout group
+RUN apt-get install -y sudo && \
+    sudo groupadd -g 20 dialout && \
+    sudo usermod -a -G dialout root
+
 
 # Copy supervisor configuration files
 COPY supervisord.conf /etc/supervisor/supervisord.conf
