@@ -3,7 +3,7 @@ services:
   gps_serial:
     
     devices:
-      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/GPS:/dev/GPS
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,7 +13,7 @@ services:
 
   ferex_serial:
     devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/FAKEFEREX:/dev/FAKEFEREX
     build:
       context: .
       dockerfile: Dockerfile
