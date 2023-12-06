@@ -2,7 +2,7 @@ import serial
 import paho.mqtt.client as mqtt
 
 # Configure serial port 2
-port2 = "/dev/ttyUSB0"  # Replace with the appropriate serial port
+port2 = "/dev/FAKEFEREX"  # Replace with the appropriate serial port
 baudrate = 115200  # Replace with the appropriate baud rate
 
 # Configure MQTT broker

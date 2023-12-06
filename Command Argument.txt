@@ -1,0 +1,1 @@
+pointperfect-lband.py -P <COM ubs serial device or COM@baudrate)> -i <CLIENT_ID> --echo

@@ -2,7 +2,7 @@ import serial
 import paho.mqtt.client as mqtt
 
 # Configure serial port 1
-port1 = "/dev/ttyACM0"  # Replace with the appropriate serial port
+port1 = "/dev/GPS"  # Replace with the appropriate serial port
 baudrate = 115200  # Replace with the appropriate baud rate
 
 # Configure MQTT broker
