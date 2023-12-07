@@ -28,6 +28,9 @@ import time
 import paho.mqtt.client as mqtt
 # pip install pyserial
 import serial
+import subprocess
+
+subprocess.run(["node-red-stop"])
 
 
 class Record:
@@ -159,3 +162,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    subprocess.run(["node-red-start"])
