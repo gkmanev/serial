@@ -5,15 +5,9 @@ import paho.mqtt.client as mqtt
 port2 = "/dev/FAKEFEREX"  # Replace with the appropriate serial port
 baudrate = 115200  # Replace with the appropriate baud rate
 
-# Configure MQTT broker
-mqtt_broker = "172.17.0.1"  # Replace with the MQTT broker address
-mqtt_port = 1883  # Replace with the MQTT broker port
-mqtt_topic = "ferex"  # MQTT topic to publish the binary buffers
-
 # Open serial port 2
 serial_port2 = serial.Serial(port2, baudrate=baudrate, timeout=0)
 mqtt_client = mqtt.Client()
-mqtt_client.connect(mqtt_broker, mqtt_port)
 
 # Read from serial port 2 continuously
 buffer = b""
@@ -34,7 +28,7 @@ while True:
             if len(buffer) >= buffer_length:
                 binary_buffer = buffer[:buffer_length]
                 print(binary_buffer)
-                mqtt_client.publish(mqtt_topic, binary_buffer)
+                
                 buffer = buffer[buffer_length:]
             else:
                 # Break the loop if the buffer length is not sufficient
